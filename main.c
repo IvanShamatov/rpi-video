@@ -324,6 +324,7 @@ void color_lcd(void) {
         {
             screen[i*j] = temp;
             ++temp;
+            printf("%x %x \n\r", screen[i*j], temp);
         }
     }
     post_screen(screen);
