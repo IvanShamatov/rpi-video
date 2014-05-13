@@ -58,19 +58,25 @@ void init_touch_spi(void)
 
 
 
-#if defined(LCD22_SPI)
-void post_data(u16 data)
+void post_screen(u16 *data)
 {
-  // en_lcd();
-  bcm2835_spi_transfer((u8)(data>>8));
-  //delayMicroseconds(12);
-  bcm2835_spi_transfer((u8)(data));
-  //delayMicroseconds(12);
+  en_lcd();
+
+  u16 size;
+  size = sizeof(data)/ sizeof(u16);
+  for(i = 0; i < size; i++){
+    bcm2835_spi_transfer((u8)(data[i]>>8));
+    bcm2835_spi_transfer((u8)(data[i]));
+  }
 }
 
 
-#endif
 
+void post_data(u16 data) {
+  en_lcd();
+  bcm2835_spi_transfer((u8)(data>>8));
+  bcm2835_spi_transfer((u8)(data));
+}
 
 
 void lcd_rst(void) 

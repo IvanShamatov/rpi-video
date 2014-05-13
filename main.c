@@ -303,7 +303,7 @@ void clear_display(void) {
 }
 
 void color_lcd(void) {
-    u16 temp, i;
+    u16 temp, i, screen[320*240];
     u8 j;
     en_lcd();
     post_cmd(0x210, 0);
@@ -316,16 +316,17 @@ void color_lcd(void) {
     en_lcd_index();
     post_data(0x202);
     en_lcd_data();
-    post_data(COLOR_BLACK);
+
     temp = 0;
-    for(j=0; j<243; j++)
+    for(j=0; j<240; j++)
     {
-        for(i=0; i<322; i++)
+        for(i=0; i<320; i++)
         {
-            post_data(temp);
+            screen[i*j] = temp;
             ++temp;
         }
     }
+    post_screen(screen);
     dis_lcd();    
 }
 
