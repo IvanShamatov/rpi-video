@@ -293,13 +293,14 @@ void clear_display(void) {
     en_lcd_index();
     post_data(0x202);
     en_lcd_data();
-    for(j=0; j<240; j++)
-    {
-        for(i=0; i<320; i++)
-        {
-            post_data(COLOR_BLACK);
-        }
-    }
+    post_data(COLOR_BLACK);
+    // for(j=0; j<240; j++)
+    // {
+    //     for(i=0; i<320; i++)
+    //     {
+    //         post_data(COLOR_BLACK);
+    //     }
+    // }
     dis_lcd();
 }
 
