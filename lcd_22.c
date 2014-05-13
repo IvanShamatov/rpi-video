@@ -62,7 +62,7 @@ void post_screen(u16 *data)
 {
   en_lcd();
 
-  u16 size;
+  u16 i, size;
   size = sizeof(data)/ sizeof(u16);
   for(i = 0; i < size; i++){
     bcm2835_spi_transfer((u8)(data[i]>>8));
