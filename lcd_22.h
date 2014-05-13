@@ -88,6 +88,7 @@ volatile u8 touch_counter;
 void init_lcd_spi(void);
 void init_touch_spi(void);
 void post_data(u16 data);
+void post_screen(u16 *screen);
 void post_cmd(u16 index, u16 cmd);
 /**/
 u16 get_touch_data(u8 cmd);
