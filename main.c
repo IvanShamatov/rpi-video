@@ -303,7 +303,7 @@ void clear_display(void) {
 }
 
 void color_lcd(void) {
-    u16 i;
+    u16 temp, i;
     u8 j;
     en_lcd();
     post_cmd(0x210, 0);
@@ -317,11 +317,13 @@ void color_lcd(void) {
     post_data(0x202);
     en_lcd_data();
     post_data(COLOR_BLACK);
+    temp = 0;
     for(j=0; j<243; j++)
     {
         for(i=0; i<322; i++)
         {
-            post_data(i+j);
+            post_data(temp);
+            ++temp;
         }
     }
     dis_lcd();    
@@ -334,6 +336,5 @@ void main(void) {
     init_lcd();
         
     clear_display();
-    DisplayString("Hello Ivan, asdf;laksdflaskjdfla;skdfja;sldkfja;sldkjfasdfas;dkfj ,asd faskdfja;sldkfj as;df asdklfjsdaklfjasldk fjlsadkf jlsadk",0,0,0);
     color_lcd();
 }
