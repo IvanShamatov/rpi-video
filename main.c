@@ -277,8 +277,6 @@ void display_touch_debug()
 // 	}
 // }
 
-#include "lcd_22.h"
-
 void clear_display(void) {
     u16 i;
     u8 j;
@@ -304,7 +302,30 @@ void clear_display(void) {
     dis_lcd();
 }
 
+void color_lcd(void) {
+    u16 i;
+    u8 j;
+    en_lcd();
+    post_cmd(0x210, 0);
+    post_cmd(0x212, 0);
+    post_cmd(0x211, 240);
+    post_cmd(0x213, 320);
+    post_cmd(0x200, 0);
+    post_cmd(0x201, 0);
 
+    en_lcd_index();
+    post_data(0x202);
+    en_lcd_data();
+    post_data(COLOR_BLACK);
+    for(j=0; j<243; j++)
+    {
+        for(i=0; i<322; i++)
+        {
+            post_data(i+j);
+        }
+    }
+    dis_lcd();    
+}
 
 void main(void) {
     u16 num;
@@ -313,5 +334,6 @@ void main(void) {
     init_lcd();
         
     clear_display();
-    DisplayString("Hello Ivan",0,0,0);
+    DisplayString("Hello Ivan, asdf;laksdflaskjdfla;skdfja;sldkfja;sldkjfasdfas;dkfj ,asd faskdfja;sldkfj as;df asdklfjsdaklfjasldk fjlsadkf jlsadk",0,0,0);
+    color_lcd();
 }
