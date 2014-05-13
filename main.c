@@ -294,9 +294,9 @@ void clear_display(void) {
     post_data(0x202);
     en_lcd_data();
     post_data(COLOR_BLACK);
-    for(j=0; j<240; j++)
+    for(j=0; j<243; j++)
     {
-        for(i=0; i<320; i++)
+        for(i=0; i<322; i++)
         {
             post_data(COLOR_BLACK);
         }
