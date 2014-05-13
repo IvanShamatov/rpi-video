@@ -61,7 +61,7 @@ void init_touch_spi(void)
 #if defined(LCD22_SPI)
 void post_data(u16 data)
 {
-  en_lcd();
+  // en_lcd();
   bcm2835_spi_transfer((u8)(data>>8));
   //delayMicroseconds(12);
   bcm2835_spi_transfer((u8)(data));
