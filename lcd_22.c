@@ -64,9 +64,12 @@ void post_screen(u16 *data)
 
   u16 i, size;
   size = sizeof(data)/ sizeof(u16);
+
+  printf("%x ", size);
   for(i = 0; i < size; i++){
     bcm2835_spi_transfer((u8)(data[i]>>8));
     bcm2835_spi_transfer((u8)(data[i]));
+    printf("%x ", data[i]);
   }
 }
 
