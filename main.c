@@ -292,7 +292,7 @@ void clear_display(void) {
     post_data(0x202);
     en_lcd_data();
     
-    for(i=0; i<76800;i++)
+    for(i=0; i<76800;i++){
        screen[i] = COLOR_BLACK;
     }
     post_screen(screen);
