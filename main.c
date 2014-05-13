@@ -259,20 +259,58 @@ void display_touch_debug()
 
 }
 
-void main(void)
-{
-        u16 num;
-        u16 *p;
-        u8 c,g;
+// void main(void)
+// {
+//         u16 num;
+//         u16 *p;
+//         u8 c,g;
 
-	init_lcd();
+// 	init_lcd();
 
-	LCD_test();
-	DisplayString("WaveShare",6,9,0);
-	DisplayString("WaveShare",6,10,1);
-	while(1){
-//	display_touch_debug();		
-	read_res=Read_Continue();
-	lcd_draw_bigdot(0xffe0,(touch_dot.x-20),(touch_dot.y-2));
-	}
+// 	LCD_test();
+// 	DisplayString("WaveShare",6,9,0);
+// 	DisplayString("WaveShare",6,10,1);
+// 	while(1){
+// //	display_touch_debug();		
+// 	read_res=Read_Continue();
+// 	lcd_draw_bigdot(0xffe0,(touch_dot.x-20),(touch_dot.y-2));
+// 	}
+// }
+
+#include "lcd_22.h"
+
+void clear_display(void) {
+    u16 i;
+    u8 j;
+    en_lcd();
+    post_cmd(0x210, 0);
+    post_cmd(0x212, 0);
+    post_cmd(0x211, 240);
+    post_cmd(0x213, 320);
+    post_cmd(0x200, 0);
+    post_cmd(0x201, 0);
+
+    en_lcd_index();
+    post_data(0x202);
+    en_lcd_data();
+    for(j=0; j<240; j++)
+    {
+        for(i=0; i<320; i++)
+        {
+            post_data(COLOR_BLACK);
+        }
+    }
+    dis_lcd();
+}
+
+
+
+void main(void) {
+    u16 num;
+    u8 i;
+
+    init_lcd();
+        
+    clear_display();
+    DisplayString("Hello Ivan",0,0,0);
 }
