@@ -278,7 +278,7 @@ void display_touch_debug()
 // }
 
 void clear_display(void) {
-    u16 i;
+    u16 i, screen[320*240];
     u8 j;
     en_lcd();
     post_cmd(0x210, 0);
@@ -291,14 +291,11 @@ void clear_display(void) {
     en_lcd_index();
     post_data(0x202);
     en_lcd_data();
-    post_data(COLOR_BLACK);
-    for(j=0; j<243; j++)
-    {
-        for(i=0; i<322; i++)
-        {
-            post_data(COLOR_BLACK);
-        }
+    
+    for(i=0; i<76800;i++)
+       screen[i] = COLOR_BLACK;
     }
+    post_screen(screen);
     dis_lcd();
 }
 
